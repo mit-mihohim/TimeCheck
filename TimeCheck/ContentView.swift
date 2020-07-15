@@ -9,8 +9,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var hour = ""
     var body: some View {
         Form {
+            Section(header: Text("How long are you studying?")) {
+                TextField("Enter number in hours", text: $hour)
+                Text("You have studied \(hour)hrs")
+            }
         }
     }
 }
