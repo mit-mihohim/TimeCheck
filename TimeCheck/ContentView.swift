@@ -9,12 +9,37 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var hour = ""
+    @State private var hours = ""
+    
+    var studyingHour: Double {
+        let studyingHour = Double(hours) ?? 0
+        return studyingHour
+    }
+    
+    var totalMinutes: Double {
+        let hour = Double(hours) ?? 0
+        
+        let totalMinutes = hour * 60
+        
+        return totalMinutes
+    }
+    
+    
     var body: some View {
-        Form {
-            Section(header: Text("How long are you studying?")) {
-                TextField("Enter number in hours", text: $hour)
-                Text("You have studied \(hour)hrs")
+        NavigationView {
+            Form {
+                
+//                studying hour
+                Section(header: Text("How long are you studying?")) {
+                    TextField("Enter number in hours", text: $hours).keyboardType(.decimalPad)
+                }
+                Section {
+                    Text("You have studied \(studyingHour, specifier: "%.2f")hrs")
+                }
+                
+                Section(header: Text("studying time in minutes")) {
+                    Text("You have been studying \(totalMinutes, specifier: "%.0f") minutes")
+                }
             }
         }
     }
